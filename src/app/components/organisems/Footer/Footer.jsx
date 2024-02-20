@@ -1,9 +1,9 @@
 function Footer() {
   return (
-    <footer className="bg-gray-800 py-14 mt-14 lg:mt-24">
+    <footer className="bg-gray-800 py-14">
       <section className="flex flex-col sm:flex-row sm:justify-between gap-7 border-b border-neutral-500 pb-10 sm:px-14">
         <img
-          src="assets/logo/prasorganic-high-resolution-logo-transparent.svg"
+          src="/assets/logo/prasorganic-high-resolution-logo-transparent.svg"
           alt=""
           className="h-[7vh]"
         />

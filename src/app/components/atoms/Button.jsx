@@ -1,16 +1,18 @@
 /* eslint-disable react/prop-types */
 
-function RedirectLink(props) {
+import { Link } from "react-router-dom";
+
+function Button(props) {
   const { marginTop, to, className, children } = props;
 
   return (
     <div className={marginTop}>
-      <a href={to} className={className}>
+      <Link to={to} className={className}>
         {children}
-      </a>
+      </Link>
     </div>
   );
 }
 
-export default RedirectLink;
+export default Button;
 
