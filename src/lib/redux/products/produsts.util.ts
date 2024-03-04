@@ -1,5 +1,3 @@
-import { Product } from "../../../interfaces/Product";
-
 export const mergeProducts = (
     existingProducts: Product[],
     newProducts: Product[]

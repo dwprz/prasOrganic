@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ButtonLoginGoogleProps } from "./ButtonProps"
+import { ButtonLoginGoogleProps } from "./button_props"
 
 const ButtonLoginGoogle: React.FC<ButtonLoginGoogleProps> = ({ type, handleSignInGoogle }) => {
     const navigate = useNavigate();

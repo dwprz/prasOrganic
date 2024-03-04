@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Product, ProductDetailProps } from "../../../../interfaces/Product";
 
 function ProductDetailsFragment(props: ProductDetailProps) {
   const {

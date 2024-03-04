@@ -85,7 +85,7 @@ export const handlePasswordSubmit = async (
       user,
       {
         headers: {
-          Authorization: "rahasia",
+          Authorization: import.meta.env.VITE_AUTHORIZATION_SECRET,
         },
       }
     );

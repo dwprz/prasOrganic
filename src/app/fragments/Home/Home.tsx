@@ -6,7 +6,7 @@ import ButtonLayout from "../../layouts/ButtonLayout";
 function HomeFragment() {
   return (
     <main className="flex flex-col pb-14 lg:pb-24">
-      <section className="relative h-screen mt-14 xl:mt-20">
+      <section className="relative h-screen">
         <div className="absolute z-20 w-full px-3 sm:px-14 left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-center">
           <hr className="mb-5 lg:mb-10" />
           <h1 className="text-neutral-100 text-3xl lg:text-8xl font-semibold">

@@ -1,6 +1,6 @@
 import { NavigateFunction } from "react-router-dom";
 
-export interface FormRegisterProps {
+interface FormRegisterProps {
     handleRegister: (
       event: React.FormEvent<HTMLFormElement>,
       navigate: NavigateFunction,

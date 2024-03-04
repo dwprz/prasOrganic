@@ -1,8 +1,7 @@
-
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../../atoms/Button/Button";
 import { InputAuth } from "../../../molecules/InputAuth/InputAuth";
-import { FormLoginProps } from "./FormLoginProps";
+import { FormLoginProps } from "./form_login_props";
 
 const inputsLogin = [
     {
@@ -11,7 +10,7 @@ const inputsLogin = [
         name: "username",
         placeholder: "Username",
         htmlFor: "username",
-        children: "Username:"
+        children: "Username"
     },
     {
         type: "password",

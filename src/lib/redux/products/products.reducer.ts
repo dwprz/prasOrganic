@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getCategoryProductsCall, getProductsCall } from "./products.action";
-import { Paging, Product, ProductsState } from "../../../interfaces/Product";
 import { mergeProducts } from "./produsts.util";
 
 const initialState: ProductsState = {

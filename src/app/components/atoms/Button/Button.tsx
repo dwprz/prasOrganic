@@ -1,4 +1,4 @@
-import { ButtonLoginGoogleProps, ButtonProps } from "./ButtonProps"
+import { ButtonProps } from "./button_props"
 
 export const Button: React.FC<ButtonProps> = ({ children, type }) => {
     return (

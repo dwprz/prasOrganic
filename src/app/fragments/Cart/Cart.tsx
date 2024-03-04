@@ -1,30 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { handleCartChange, handleCheckboxChange, handleChecked, handleRemoveCart } from "./cart.util";
 
-type TypeCart = {
-  id: number;
-  idUser: number;
-  idProduct: number;
-  totalPrice: number;
-  totalCart: number | string;
-  product: {
-    productName: string;
-    src: string;
-    discountPrice: number;
-    stock: number;
-  }
-}[]
-
-const initCart: TypeCart = [
+const initCart: Cart[] = [
   {
     id: 1,
     idUser: 10,
     idProduct: 2,
     totalPrice: 100000,
-    totalCart: 4,
+    quantity: 4,
     product: {
       productName: "Apel Hijau2",
       src: "/assets/products/buah/apel-hijau.jpg",
-      discountPrice: 25000,
+      price: 25000,
       stock: 7,
     },
   },
@@ -33,11 +20,11 @@ const initCart: TypeCart = [
     idUser: 10,
     idProduct: 3,
     totalPrice: 100000,
-    totalCart: 4,
+    quantity: 4,
     product: {
       productName: "Apel Hijau3",
       src: "/assets/products/buah/apel-hijau.jpg",
-      discountPrice: 25000,
+      price: 25000,
       stock: 7,
     },
   },
@@ -46,11 +33,11 @@ const initCart: TypeCart = [
     idUser: 10,
     idProduct: 4,
     totalPrice: 100000,
-    totalCart: 4,
+    quantity: 4,
     product: {
       productName: "Apel Hijau4",
       src: "/assets/products/buah/apel-hijau.jpg",
-      discountPrice: 25000,
+      price: 25000,
       stock: 7,
     },
   },
@@ -59,51 +46,30 @@ const initCart: TypeCart = [
     idUser: 10,
     idProduct: 5,
     totalPrice: 100000,
-    totalCart: 4,
+    quantity: 4,
     product: {
       productName: "Apel Hijau5",
       src: "/assets/products/buah/apel-hijau.jpg",
-      discountPrice: 25000,
+      price: 25000,
       stock: 7,
     },
   },
 ];
 
 function CartFragment() {
-  const [cart, setCart] = useState(initCart);
+  const [cart, setCart] = useState<Cart[]>(initCart);
+  const [selectedCart, setSelectedCart] = useState<Cart[]>([])
+  const [totalSum, setTotalSum] = useState<number>(0);
 
-  const handleCartChange = (index: number, value: string) => {
-    const inputValue = parseInt(value);
-    const updateCart = cart.map((item: typeof initCart[0], idx) => {
-      if (idx === index) {
-        const totalCart = isNaN(inputValue) || inputValue < 1 ? "" : inputValue > item.product.stock ? item.product.stock : inputValue;
-        const totalPrice = Number(totalCart) * item.product.discountPrice;
-        return { ...item, totalCart, totalPrice };
-      }
-      return item;
-    });
-    setCart(updateCart);
-  };
+  useEffect(() => {
+    const result = selectedCart.reduce(
+      (accumulator, item) =>
+        accumulator + item.totalPrice,
+      0
+    );
 
-  const [selectedItems, setSelectedItems] = useState<number[]>([]);
-
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const { checked } = event.target;
-    if (checked) {
-      setSelectedItems([...selectedItems, index]);
-    } else {
-      setSelectedItems(selectedItems.filter((item) => item !== index));
-    }
-  };
-
-  console.log(selectedItems);
-
-  const result = selectedItems.reduce(
-    (accumulator, indexSelectedItems) =>
-      accumulator + cart[indexSelectedItems].totalPrice,
-    0
-  );
-  console.log(result);
+    setTotalSum(result)
+  }, [selectedCart, cart])
 
   return (
     <main className="px-5 sm:px-10 lg:px-24 pb-14 pt-28 lg:pb-32 lg:pt-36 lg:h-max lg:flex lg:items-start lg:gap-20">
@@ -118,8 +84,8 @@ function CartFragment() {
             cart.map((item, index) => {
               const {
                 totalPrice,
-                totalCart,
-                product: { productName, src, discountPrice, stock },
+                quantity,
+                product: { productName, src, price, stock },
               } = item;
 
               return (
@@ -129,8 +95,8 @@ function CartFragment() {
                 >
                   <input
                     type="checkbox"
-                    checked={selectedItems.includes(index)}
-                    onChange={(event) => handleCheckboxChange(event, index)}
+                    checked={handleChecked(item, selectedCart)}
+                    onChange={(event) => handleCheckboxChange(event, item, selectedCart, setSelectedCart)}
                   />
                   <img src={src} alt={productName} className="w-40 h-auto" />
                   <figcaption className="flex items-start gap-2">
@@ -140,7 +106,7 @@ function CartFragment() {
                           {productName}
                         </h1>
                         <p className="text-xs">
-                          {discountPrice.toLocaleString("id-ID", {
+                          {price.toLocaleString("id-ID", {
                             style: "currency",
                             currency: "IDR",
                           })}
@@ -157,8 +123,9 @@ function CartFragment() {
                         <button
                           onClick={() =>
                             handleCartChange(
-                              index,
-                              String(Number(totalCart) - 1),
+                              item,
+                              String(Number(quantity) - 1),
+                              cart, setCart, selectedCart, setSelectedCart
                             )
                           }
                           type="button"
@@ -170,11 +137,12 @@ function CartFragment() {
                           className="text-center"
                           min={1}
                           max={stock}
-                          value={totalCart}
+                          value={quantity}
                           onChange={(event) =>
                             handleCartChange(
-                              index,
+                              item,
                               event.target.value,
+                              cart, setCart, selectedCart, setSelectedCart
                             )
                           }
                         />
@@ -182,8 +150,9 @@ function CartFragment() {
                           type="button"
                           onClick={() =>
                             handleCartChange(
-                              index,
-                              String(Number(totalCart) + 1),
+                              item,
+                              String(Number(quantity) + 1),
+                              cart, setCart, selectedCart, setSelectedCart
                             )
                           }
                         >
@@ -192,11 +161,7 @@ function CartFragment() {
                       </div>
                     </div>
                     <button
-                      onClick={() => {
-                        const updateCart = [...cart];
-                        updateCart.splice(index, 1);
-                        setCart(updateCart);
-                      }}
+                      onClick={() => handleRemoveCart(item, cart, setCart, selectedCart, setSelectedCart)}
                     >
                       <i className="fa-solid fa-xmark hover:text-teal-700"></i>
                     </button>
@@ -222,7 +187,9 @@ function CartFragment() {
           <tbody>
             <tr className="even:bg-slate-200">
               <td className="p-5 text-left">Subtotal</td>
-              <td className="p-5 text-right whitespace-nowrap">ada</td>
+              <td className="p-5 text-right whitespace-nowrap">
+                {totalSum.toLocaleString("id-ID", { style: "currency", currency: "IDR" })}
+              </td>
             </tr>
           </tbody>
         </table>

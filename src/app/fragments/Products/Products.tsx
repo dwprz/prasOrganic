@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../lib/redux/store";
 import { useEffect, useState } from "react";
 import { getProductsCall } from "../../../lib/redux/products/products.action";
-import { Product, ProductDetailState, ProductsPageState } from "../../../interfaces/Product";
 import ProductDetailsFragment from "./ProductDetails/ProductDetails";
 import { handleClickBeli, handleClickCategory, handleSubmitSearch, loadMoreProducts } from "./products.util";
 
