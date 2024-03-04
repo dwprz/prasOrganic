@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 function AboutFrgament() {
+
     return (
         <main>
             <section className="relative h-screen border-b-2 xl:border-b-4 border-gray-800">
