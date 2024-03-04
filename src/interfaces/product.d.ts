@@ -1,4 +1,4 @@
-export interface Product {
+interface Product {
   id: number;
   name: string;
   image: string;
@@ -10,18 +10,18 @@ export interface Product {
   description?: string | null;
 }
 
-export interface Paging {
+interface Paging {
   page: number;
   total_page: number;
   total_products: number;
 }
 
-export interface CategoryState {
+interface CategoryState {
   data: Product[];
   paging: Paging;
 }
 
-export interface ProductsState {
+interface ProductsState {
   data: Product[];
   paging: Paging;
   category: Record<string, CategoryState>;
@@ -29,19 +29,19 @@ export interface ProductsState {
   detail_product: Product;
 }
 
-export interface ProductsPageState {
+interface ProductsPageState {
   page: number;
   isLoading: boolean;
   active: string;
   statusCode: number;
 }
 
-export interface ProductDetailState {
+interface ProductDetailState {
   product: Product;
   hidden: boolean;
 }
 
-export interface ProductDetailProps {
+interface ProductDetailProps {
   productDetailState: ProductDetailState;
   setProductDetailState: React.Dispatch<
     React.SetStateAction<ProductDetailState>

@@ -3,7 +3,7 @@ import {
   Product,
   ProductDetailState,
   ProductsPageState,
-} from "../../../interfaces/Product";
+} from "../../../interfaces/product";
 import {
   getCategoryProductsCall,
   getProductsCall,

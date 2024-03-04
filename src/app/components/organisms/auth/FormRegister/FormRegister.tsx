@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useRegister } from "../../../../fragments/auth/Register/context";
 import { InputAuth } from "../../../molecules/InputAuth/InputAuth";
 import { Button } from "../../../atoms/Button/Button";
-import { FormRegisterProps } from "./FormRegisterProps";
+import { FormRegisterProps } from "./form_register_props";
 
 const inputsRegister = [
     {
@@ -11,7 +11,7 @@ const inputsRegister = [
         name: "username",
         placeholder: "johndoe23",
         htmlFor: "username",
-        children: "Username:"
+        children: "Username"
     },
     {
         type: "text",

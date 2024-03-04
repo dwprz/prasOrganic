@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import { Link } from "react-router-dom";
-import { ButtonLinkProps } from "./ButtonProps";
+import { ButtonLinkProps } from "./button_props";
 
 const ButtonLink: React.FC<ButtonLinkProps> = (props) => {
     const { marginTop, to, className, children } = props;

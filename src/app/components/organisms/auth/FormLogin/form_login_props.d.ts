@@ -1,6 +1,6 @@
 import { NavigateFunction } from "react-router-dom";
 
-export interface FormLoginProps {
+interface FormLoginProps {
   handleSignInRegular: (
     event: React.FormEvent<HTMLFormElement>,
     navigate: NavigateFunction
