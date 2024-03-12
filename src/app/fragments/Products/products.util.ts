@@ -1,10 +1,4 @@
 import {
-  CategoryState,
-  Product,
-  ProductDetailState,
-  ProductsPageState,
-} from "../../../interfaces/product";
-import {
   getCategoryProductsCall,
   getProductsCall,
 } from "../../../lib/redux/products/products.action";
