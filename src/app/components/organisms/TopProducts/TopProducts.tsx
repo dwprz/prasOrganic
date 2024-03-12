@@ -142,7 +142,7 @@ function TopProducts() {
             return (
               <SwiperSlide key={product.id}>
                 <figure
-                  className={`shadow-xl sm:w-[20rem] xl:w-[17rem] 2xl:w-[22rem] ${index > 3 ? "hidden sm:block" : ""
+                  className={`shadow-xl sm:w-[20rem] xl:w-[17rem] 2xl:w-[20rem] ${index > 3 ? "hidden sm:block" : ""
                     }`}
                 >
                   <img
